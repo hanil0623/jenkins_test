@@ -1,62 +1,96 @@
 <template lang="html">
-  <div>
-    <div>
-      <span>{{num}}</span>
-      <div>
-        <button @click="increment">증가</button>
-        <button @click="decrement">감소</button>
+  <div class = "trello-clone">
+    <h1>Trello Clone</h1>
+    <div
+      class="trello-list"
+      v-for="list in board" 
+      v-bind:key="list.listName">
+      <div class="trello-list-name">
+      {{ list.listName}}
       </div>
+      <div class="trello-card" v-for="(card, index) in list.cards"
+       v-bind:key="card">
+      <input v-model="list.cards[index]"/>
+      </div>
+      <div class="trello-add-task" v-on:click="addTask(list.listName)">+</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: "TrelloClone",
   data(){
     return {
-      num: 0
-    }
+      board: [
+        {
+          listName: "A",
+          cards: ["TaskA", "TaskA2"]
+        },
+        {
+          listName: "B",
+          cards: ["TaskB"]
+        },
+        {
+          listName: "C",
+          cards: []
+        },
+        {
+          listName: "D",
+          cards: ["TaskD"]
+        }
+      ]
+    };
   },
   methods: {
-    increment() {
-      this.num++;
-    },
-    decrement() {
-      this.num--;
+    addTask(listName) {
+      const newTask = prompt(listName, "");
+      this.board.find(list => list.listName === listName).cards.push(newTask);
     }
   }
-}
+};
 </script>
 
-<style lang="css">
-*{margin: 0; padding: 0;}
-html,body {height: 100%}
-#wrap {
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+<style scoped lang="scss">
+@mixin card {
+  height: fit-content;
+  padding: 10px 0;
+  background-color: lightgray;
 }
-#wrap > div {
-  text-align: center;
-}
-span {
-  display: inline-block;
-  margin-bottom: 10px;
-  color: #53a9f9;
-  font-size: 32px;
-  font-weight: 700;
-}
-button {
-  padding: 0 8px;
-  min-width: 60px;
-  height: 34px;
-  line-height: 34px;
-  color: #fff;
-  font-size: 16px;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  background-color: #88c5ff;
+
+.trello-list {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100px;
+  border: 1px solid black;
+  margin: 0 20px;
+
+  .trello-list-name {
+    @include card;
+    background-color: skyblue;
+  }
+
+  .trello-card {
+    @include card;
+    margin: 10px 0 0;
+    border: 1px solid black;
+
+    input {
+      border: 0;
+      width: 100%;
+      background-color: transparent;
+      text-align: center;
+    }
+
+    input:focus {
+      outline: 0;
+    }
+  }
+
+  .trello-add-task {
+    @include card;
+    margin: 10px 0 0;
+    border: 1px solid black;
+  }
 }
 </style>
