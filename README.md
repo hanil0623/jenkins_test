@@ -1,24 +1,13 @@
-# my-project3
+## As-Is
 
-## Project setup
-```
-npm install
-```
+- Vue Trello Cloning을 통한 프레임워크 습득
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![Alt text](./assets/img_201015.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- oAuth Example Cloning을 통한 인증 원리 습득
 
-### Lints and fixes files
-```
-npm run lint
-```
+## To-Do
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Vue Components 간 데이터 전달 원리 습득 ( ~ 20)
+
+- Vue Page Cloning ( ~ 20)
